@@ -440,9 +440,25 @@ Promise inside Timeout
 
 ## Q22
 ```js
-async function foo(){console.log("A");await bar();console.log("B");}
-async function bar(){console.log("C");}
-console.log("D");foo();console.log("E");
+async function foo()
+{
+    console.log("A");
+    
+    await bar();
+    
+    console.log("B");
+}
+
+async function bar()
+{
+    console.log("C");
+}
+
+console.log("D");
+
+foo();
+
+console.log("E");
 ```
 **Output**
 ```text
@@ -456,8 +472,24 @@ B
 ## Q23
 ```js
 console.log(1);
-setTimeout(()=>{console.log(2);Promise.resolve().then(()=>console.log(3));},0);
-Promise.resolve().then(()=>{console.log(4);setTimeout(()=>console.log(5),0);});
+
+setTimeout(()=>
+{
+    console.log(2);
+    
+    Promise.resolve().then(()=>console.log(3));
+    
+},0);
+
+Promise.resolve()
+    .then(()=>
+    {
+        console.log(4);
+        
+        setTimeout(()=>console.log(5),0);
+
+    });
+    
 console.log(6);
 ```
 **Output**
