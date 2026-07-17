@@ -633,3 +633,108 @@ anonymous
 - The Microtask Queue is still empty because the Promise has **not been resolved or rejected yet**.
 ---
 
+# Step 15
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ handlePromiseResult(resolve, reject, null, │ ← Current Function
+│ user)                                      │
+├────────────────────────────────────────────┤
+│ onPromiseTimerComplete(resolve, reject,    │
+│ userId)                                    │
+├────────────────────────────────────────────┤
+│ anonymous                                  │
+└────────────────────────────────────────────┘
+```
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Task Queue
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+---
+
+# Step 16
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ handlePromiseResult(resolve, reject, null, │ ← Current Function
+│ user)                                      │
+├────────────────────────────────────────────┤
+│ onPromiseTimerComplete(resolve, reject,    │
+│ userId)                                    │
+├────────────────────────────────────────────┤
+│ anonymous                                  │
+└────────────────────────────────────────────┘
+```
+
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌──────────────────────────┐
+│ anonymous                │ ← .then() callback
+└──────────────────────────┘
+```
+
+---
+
+### Explanation
+
+- `matchUserById()` has successfully returned the user object.
+- Control returns to `onPromiseTimerComplete()`, which calls:
+
+```js
+return handlePromiseResult(resolve, reject, null, user);
+```
+
+- Inside `handlePromiseResult()`, the `error` is `null`, so the Promise is resolved:
+
+```js
+return resolve(user);
+```
+
+- Calling `resolve(user)` **fulfills the Promise**.
+- As soon as the Promise is fulfilled, JavaScript schedules the attached `.then()` callback as a **microtask**.
+- Therefore, an **anonymous** callback (representing the `.then()` handler) is added to the **Micro Task Queue**.
+- `handlePromiseResult()` is still executing its final statement, so it remains on the top of the Call Stack.
+- The Event Loop **does not execute the microtask immediately** because the Call Stack is not empty yet.
+- The `.then()` callback will execute **only after** the entire Call Stack becomes empty.
+---
