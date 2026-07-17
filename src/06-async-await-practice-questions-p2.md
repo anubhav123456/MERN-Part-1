@@ -287,7 +287,13 @@ console.log(5);
 
 ## Q16
 ```js
-console.log("Start");setTimeout(()=>console.log("Timeout"),0);Promise.resolve().then(()=>console.log("Promise"));console.log("End");
+console.log("Start");
+
+setTimeout(()=>console.log("Timeout"),0);
+
+Promise.resolve().then(()=>console.log("Promise"));
+
+console.log("End");
 ```
 **Output**
 ```text
@@ -299,7 +305,15 @@ Timeout
 
 ## Q17
 ```js
-console.log(1);setTimeout(()=>console.log(2),0);Promise.resolve().then(()=>console.log(3));Promise.resolve().then(()=>console.log(4));console.log(5);
+console.log(1);
+
+setTimeout(()=>console.log(2),0);
+
+Promise.resolve().then(()=>console.log(3));
+
+Promise.resolve().then(()=>console.log(4));
+
+console.log(5);
 ```
 **Output**
 ```text
@@ -313,8 +327,17 @@ console.log(1);setTimeout(()=>console.log(2),0);Promise.resolve().then(()=>conso
 ## Q18
 ```js
 console.log("A");
-setTimeout(()=>{console.log("B");Promise.resolve().then(()=>console.log("C"));},0);
+
+setTimeout(()=>
+{
+    console.log("B");
+    
+    Promise.resolve().then(()=>console.log("C"));
+    
+},0);
+
 Promise.resolve().then(()=>console.log("D"));
+
 console.log("E");
 ```
 **Output**
@@ -328,8 +351,24 @@ C
 
 ## Q19
 ```js
-async function foo(){console.log(1);await Promise.resolve();console.log(2);}
-console.log(3);setTimeout(()=>console.log(4),0);foo();Promise.resolve().then(()=>console.log(5));console.log(6);
+async function foo()
+{
+    console.log(1);
+    
+    await Promise.resolve();
+    
+    console.log(2);
+}
+
+console.log(3);
+
+setTimeout(()=>console.log(4),0);
+
+foo();
+
+Promise.resolve().then(()=>console.log(5));
+
+console.log(6);
 ```
 **Output**
 ```text
@@ -344,10 +383,22 @@ console.log(3);setTimeout(()=>console.log(4),0);foo();Promise.resolve().then(()=
 ## Q20
 ```js
 console.log(1);
+
 setTimeout(()=>console.log(2),0);
+
 Promise.resolve().then(()=>console.log(3)).then(()=>console.log(4));
-async function test(){console.log(5);await Promise.resolve();console.log(6);}
+
+async function test()
+{
+    console.log(5);
+    
+    await Promise.resolve();
+    
+    console.log(6);
+}
+
 test();
+
 console.log(7);
 ```
 **Output**
@@ -364,8 +415,17 @@ console.log(7);
 ## Q21
 ```js
 console.log("Start");
-setTimeout(()=>{console.log("Timeout 1");Promise.resolve().then(()=>console.log("Promise inside Timeout"));},0);
+
+setTimeout(()=>
+{
+    console.log("Timeout 1");
+    
+    Promise.resolve().then(()=>console.log("Promise inside Timeout"));
+
+},0);
+
 Promise.resolve().then(()=>console.log("Promise 1")).then(()=>console.log("Promise 2"));
+
 console.log("End");
 ```
 **Output**
