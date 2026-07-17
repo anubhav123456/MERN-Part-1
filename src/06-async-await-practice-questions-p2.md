@@ -489,7 +489,7 @@ Promise.resolve()
         setTimeout(()=>console.log(5),0);
 
     });
-    
+
 console.log(6);
 ```
 **Output**
@@ -504,8 +504,28 @@ console.log(6);
 
 ## Q24
 ```js
-async function test(){console.log(1);await Promise.resolve();console.log(2);setTimeout(()=>console.log(3),0);await Promise.resolve();console.log(4);}
-console.log(5);test();Promise.resolve().then(()=>console.log(6));console.log(7);
+async function test()
+{
+    console.log(1);
+    
+    await Promise.resolve();
+    
+    console.log(2);
+    
+    setTimeout(()=>console.log(3),0);
+    
+    await Promise.resolve();
+    
+    console.log(4);
+}
+
+console.log(5);
+
+test();
+
+Promise.resolve().then(()=>console.log(6));
+
+console.log(7);
 ```
 **Output**
 ```text
@@ -521,8 +541,27 @@ console.log(5);test();Promise.resolve().then(()=>console.log(6));console.log(7);
 ## Q25
 ```js
 console.log("A");
-setTimeout(()=>{console.log("B");Promise.resolve().then(()=>console.log("C"));setTimeout(()=>console.log("D"),0);},0);
-Promise.resolve().then(()=>{console.log("E");setTimeout(()=>console.log("F"),0);Promise.resolve().then(()=>console.log("G"));});
+
+setTimeout(()=>
+{
+    console.log("B");
+    
+    Promise.resolve().then(()=>console.log("C"));
+    
+    setTimeout(()=>console.log("D"),0);
+
+},0);
+
+Promise.resolve()
+    .then(()=>
+    {
+        console.log("E");
+        
+        setTimeout(()=>console.log("F"),0);
+        
+        Promise.resolve().then(()=>console.log("G"));
+    });
+    
 console.log("H");
 ```
 **Output**
