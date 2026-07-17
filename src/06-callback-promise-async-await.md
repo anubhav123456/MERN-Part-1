@@ -556,3 +556,80 @@
 At this point, the Event Loop has finished processing the callback example and is ready to continue with any future asynchronous work.
 
 ---
+# Step 14
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ matchUserById(userId)                      │ ← Current Function
+├────────────────────────────────────────────┤
+│ onPromiseTimerComplete(resolve, reject,    │
+│ userId)                                    │
+├────────────────────────────────────────────┤
+│ anonymous                                  │
+└────────────────────────────────────────────┘
+```
+
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+---
+
+### Explanation
+
+- The callback example has completely finished.
+- The Event Loop picked the **Promise timer callback** from the Task Queue.
+
+```js
+() => onPromiseTimerComplete(resolve, reject, userId)
+```
+
+- This anonymous function started executing and called:
+
+```js
+onPromiseTimerComplete(resolve, reject, userId);
+```
+
+- Inside `onPromiseTimerComplete()`, JavaScript searches for the requested user by calling:
+
+```js
+const user = matchUserById(userId);
+```
+
+- Therefore, the Call Stack becomes:
+
+```text
+matchUserById()
+↓
+onPromiseTimerComplete()
+↓
+anonymous
+```
+
+- `matchUserById()` is currently executing to find the user.
+- The Task Queue is now empty because its only task has already been moved to the Call Stack.
+- The Microtask Queue is still empty because the Promise has **not been resolved or rejected yet**.
+---
+
