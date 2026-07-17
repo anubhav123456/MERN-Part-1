@@ -384,3 +384,41 @@
 └──────────────────────────┘
 ```
 ---
+
+# Step 10
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ anonymous                                  │ ← Callback from setTimeout
+└────────────────────────────────────────────┘
+```
+
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+> **Note:** Callback version ka timer complete ho chuka hai, isliye uska callback Event Loop ne Call Stack me bhej diya.
+> Promise version ka callback bhi timer complete kar chuka hai aur ab Task Queue me wait kar raha hai.
+
+## Task Queue
+
+```text
+┌──────────────────────────┐
+│ anonymous                │
+└──────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+---
