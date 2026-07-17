@@ -218,8 +218,18 @@ console.log(4);
 
 ## Q13
 ```js
-async function test(){console.log("A");await Promise.resolve();console.log("B");}
-test();console.log("C");
+async function test()
+{
+    console.log("A");
+    
+    await Promise.resolve();
+    
+    console.log("B");
+}
+
+test();
+
+console.log("C");
 ```
 **Output**
 ```text
@@ -230,8 +240,13 @@ B
 
 ## Q14
 ```js
-async function test(){return 100;}
+async function test()
+{
+    return 100;
+}
+
 test().then(console.log);
+
 console.log(200);
 ```
 **Output**
@@ -242,8 +257,24 @@ console.log(200);
 
 ## Q15
 ```js
-async function test(){console.log(1);await Promise.resolve();console.log(2);await Promise.resolve();console.log(3);}
-console.log(4);test();console.log(5);
+async function test()
+{
+    console.log(1);
+    
+    await Promise.resolve();
+    
+    console.log(2);
+    
+    await Promise.resolve();
+    
+    console.log(3);
+}
+
+console.log(4);
+
+test();
+
+console.log(5);
 ```
 **Output**
 ```text
