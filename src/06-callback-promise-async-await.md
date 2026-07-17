@@ -403,8 +403,8 @@
 └────────────────────────────────────────────┘
 ```
 
-> **Note:** Callback version ka timer complete ho chuka hai, isliye uska callback Event Loop ne Call Stack me bhej diya.
-> Promise version ka callback bhi timer complete kar chuka hai aur ab Task Queue me wait kar raha hai.
+> **Note:** The callback version's timer has completed, so the Event Loop has pushed its callback onto the Call Stack. 
+> The Promise version's timer has also completed, and its callback is now waiting in the Task Queue.
 
 ## Task Queue
 
