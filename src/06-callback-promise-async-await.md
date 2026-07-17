@@ -738,3 +738,65 @@ return resolve(user);
 - The Event Loop **does not execute the microtask immediately** because the Call Stack is not empty yet.
 - The `.then()` callback will execute **only after** the entire Call Stack becomes empty.
 ---
+
+# Step 17
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ anonymous                                  │ ← .then() Callback (Current Function)
+└────────────────────────────────────────────┘
+```
+
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+---
+
+### Explanation
+
+- `handlePromiseResult()` has finished executing and returned.
+- `onPromiseTimerComplete()` has also finished executing and returned.
+- The timer callback's anonymous function has also completed, leaving the **Call Stack empty**.
+- Since the Call Stack is now empty, the Event Loop moves to **Run all Microtasks**.
+- The oldest microtask is removed from the **Micro Task Queue** and pushed onto the **Call Stack**.
+- This microtask is the Promise's `.then()` callback:
+
+```js
+.then((user) => {
+    console.log("promise result:", user.id, user.name);
+})
+```
+
+- Therefore, the `anonymous` function shown on the Call Stack represents the `.then()` callback that is now executing.
+- Inside this callback, `console.log()` is about to print:
+
+```text
+promise result: 3 roman user
+```
+
+- The Task Queue and Micro Task Queue are now empty because the only pending microtask has already been moved to the Call Stack.
+
+---
