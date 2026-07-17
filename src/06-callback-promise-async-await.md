@@ -502,3 +502,57 @@
 └──────────────────────────┘
 ```
 ---
+
+# Step 13
+
+## Call Stack
+
+```text
+┌────────────────────────────────────────────┐
+│ anonymous                                  │ ← Current Function
+└────────────────────────────────────────────┘
+```
+
+## Web API
+
+```text
+┌────────────────────────────────────────────┐
+│                                            │
+└────────────────────────────────────────────┘
+```
+
+## Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+## Micro Task Queue
+
+```text
+┌──────────────────────────┐
+│                          │
+└──────────────────────────┘
+```
+
+---
+
+### Explanation
+
+- `onUserFound()` has finished executing and returned.
+- `onCallbackTimerComplete()` has also finished and returned.
+- Now only the timer callback's anonymous function remains on the Call Stack.
+
+```js
+() => onCallbackTimerComplete(userId, cb)
+```
+
+- After this anonymous function returns, the Call Stack becomes completely empty.
+- The callback-based asynchronous flow is now fully completed.
+- There are no pending tasks in the Task Queue and no pending microtasks in the Microtask Queue.
+
+At this point, the Event Loop has finished processing the callback example and is ready to continue with any future asynchronous work.
+
+---
