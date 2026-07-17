@@ -199,7 +199,7 @@ The final synchronous call in the global execution context is `findUserWithAsync
 
 Inside `findUserWithAsyncAwait`, the expression `await findUserWithPromise(3)` is executed. This fires off `findUserWithPromise`, registering a third timer (Timer #3) in the background.
 
-As soon as JavaScript encounters the `await` keyword, **it suspends the execution of `findUserWithAsyncAwait**`, yielding control back to the global execution context.
+As soon as JavaScript encounters the `await` keyword, **it suspends the execution of** `findUserWithAsyncAwait`, yielding control back to the global execution context.
 
 ### Call Stack
 
