@@ -152,7 +152,19 @@ Promise.resolve(10)
 
 ## Q10
 ```js
-Promise.resolve().then(()=>{throw new Error("Oops");}).catch(()=>console.log("Caught")).then(()=>console.log("Done"));
+Promise.resolve()
+    .then(()=>
+    {
+        throw new Error("Oops");
+    })
+    .catch(()=>
+    {
+        console.log("Caught")
+    })
+    .then(()=>
+    {
+        console.log("Done")
+    });
 ```
 **Output**
 ```text
@@ -162,7 +174,16 @@ Done
 
 ## Q11
 ```js
-Promise.resolve().then(()=>{console.log(1);return Promise.resolve(2);}).then(v=>console.log(v));
+Promise.resolve()
+    .then(()=>
+    {
+        console.log(1);
+        return Promise.resolve(2);
+    })
+    .then((v)=>
+    {
+        console.log(v)
+    });
 ```
 **Output**
 ```text
