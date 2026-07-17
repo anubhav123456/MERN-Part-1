@@ -3,7 +3,9 @@
 ## Q1
 ```js
 console.log("Start");
+
 setTimeout(()=>console.log("Timeout"),0);
+
 console.log("End");
 ```
 **Output**
@@ -16,8 +18,11 @@ Timeout
 ## Q2
 ```js
 console.log(1);
+
 setTimeout(()=>console.log(2),1000);
+
 setTimeout(()=>console.log(3),0);
+
 console.log(4);
 ```
 **Output**
@@ -30,8 +35,9 @@ console.log(4);
 
 ## Q3
 ```js
-for (var i=0;i<3;i++){
- setTimeout(()=>console.log(i),100);
+for (var i=0;i<3;i++)
+{
+    setTimeout(()=>console.log(i),100);
 }
 ```
 **Output**
@@ -43,8 +49,9 @@ for (var i=0;i<3;i++){
 
 ## Q4
 ```js
-for (let i=0;i<3;i++){
- setTimeout(()=>console.log(i),100);
+for (let i=0;i<3;i++)
+{
+    setTimeout(()=>console.log(i),100);
 }
 ```
 **Output**
@@ -57,7 +64,9 @@ for (let i=0;i<3;i++){
 ## Q5
 ```js
 console.log("Start");
+
 Promise.resolve().then(()=>console.log("Promise"));
+
 console.log("End");
 ```
 **Output**
@@ -70,8 +79,11 @@ Promise
 ## Q6
 ```js
 console.log(1);
+
 Promise.resolve().then(()=>console.log(2));
+
 console.log(3);
+
 Promise.resolve().then(()=>console.log(4));
 ```
 **Output**
@@ -85,8 +97,11 @@ Promise.resolve().then(()=>console.log(4));
 ## Q7
 ```js
 console.log("A");
+
 setTimeout(()=>console.log("B"),0);
+
 Promise.resolve().then(()=>console.log("C"));
+
 console.log("D");
 ```
 **Output**
@@ -100,6 +115,7 @@ B
 ## Q8
 ```js
 Promise.resolve().then(()=>console.log(1)).then(()=>console.log(2)).then(()=>console.log(3));
+
 console.log(4);
 ```
 **Output**
@@ -112,7 +128,20 @@ console.log(4);
 
 ## Q9
 ```js
-Promise.resolve(10).then(x=>{console.log(x);return x*2;}).then(x=>{console.log(x);return x+5;}).then(x=>console.log(x));
+Promise.resolve(10)
+    .then((x)=>
+    {
+        console.log(x);return x*2;
+    })
+    .then((x)=>
+    {
+        console.log(x);
+        return x+5;
+    })
+    .then((x)=>
+    {
+        console.log(x)
+    });
 ```
 **Output**
 ```text
